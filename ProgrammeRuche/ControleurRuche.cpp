@@ -28,24 +28,16 @@ ControleurRuche::ControleurRuche() {
     leModemSigfox->begin();
     choixTrame = true;
 
-
+    Serial.println("Constructeur controleur");
     laBalance->ConfiguerOffset(EEPROM.readDouble(0)); // lire le coef offset à l'adresse 0 et configuration de offset
     laBalance->ConfiguerScale(EEPROM.readDouble(10)); // lire le coef scale à l'adresse 10 et configuration de scale
-
+    
 }
 
 ControleurRuche::ControleurRuche(const ControleurRuche& orig) {
 }
 
 ControleurRuche::~ControleurRuche() {
-}
-
-void ControleurRuche::EnvoyerDonneesMesures() {
-
-}
-
-void ControleurRuche::EnvoyerDonneesBatterie() {
-
 }
 
 void ControleurRuche::RecupererDonnees() {
@@ -59,7 +51,7 @@ void ControleurRuche::RecupererDonnees() {
     Serial.print(lesMesuresC.humidite);
     Serial.print("% RH\t");
     Serial.print("Pressure: ");
-    Serial.print(lesMesuresC.pression / 100);
+    Serial.print(lesMesuresC.pression);
     Serial.print("hPa\t");
     Serial.print("eclairement: ");
     Serial.print(lesMesuresC.eclairement);
@@ -89,18 +81,20 @@ void ControleurRuche::RecupererDonneesBatterie() {
     Serial.print(lesMesuresBatterie.tauxDeChargeBatterie);
     Serial.println("%");
     Serial.println("");
-    
+
     delay(1000);
 
 }
 
 void ControleurRuche::Ordonnancer() {
     if (choixTrame == true) {
-        //RecupererDonnees();
+        RecupererDonnees();
+        leModemSigfox->ForgerTrameMesure(lesMesuresC, masse);
         choixTrame = false;
 
     } else {
         RecupererDonneesBatterie();
+        leModemSigfox->ForgerTrameBatterie(lesMesuresBatterie);
         choixTrame = true;
     }
 }

@@ -29,9 +29,6 @@ public:
     ControleurRuche();
     ControleurRuche(const ControleurRuche& orig);
     virtual ~ControleurRuche();
-
-    void EnvoyerDonneesMesures();
-    void EnvoyerDonneesBatterie();
     void Ordonnancer();
     void RecupererDonnees();
     void RecupererDonneesBatterie();

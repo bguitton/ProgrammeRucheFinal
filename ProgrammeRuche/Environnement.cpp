@@ -40,7 +40,7 @@ Environnement::Environnement(bool _debug,BME280I2C::I2CAddr adresse)
     if (debug) {
         Serial.println("Debug");
     }
-   Serial.println("Constucteur Environnement");
+   
 }
 
 

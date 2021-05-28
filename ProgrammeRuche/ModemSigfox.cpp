@@ -30,20 +30,20 @@ void ModemSigfox::ForgerTrameMesure(mesure lesMesures, float masse) {
 
     // bool StatusSig=envoyer((void*)&laTrameMesure,sizeof(laTrameMesure));
     // Serial.println("Envoi effectuer");
-//    Serial.print("poids :");
-//    Serial.println(laTrameMesure.masse);
-//    Serial.print("température :");
-//    Serial.println(laTrameMesure.temperature);
-//    Serial.print("pression :");
-//    Serial.println(laTrameMesure.pression);
-//    Serial.print("eclairement :");
-//    Serial.println(laTrameMesure.eclairement);
-//    Serial.print("point de rosée :");
-//    Serial.println(laTrameMesure.pointDeRosee);
-//    Serial.print("humidité :");
-//    Serial.println(laTrameMesure.humidite);
-//    Serial.print("type :");
-//    Serial.println(laTrameMesure.typeTrame);
+    Serial.print("poids :");
+    Serial.println(laTrameMesure.masse);
+    Serial.print("température :");
+    Serial.println(laTrameMesure.temperature);
+    Serial.print("pression :");
+    Serial.println(laTrameMesure.pression);
+    Serial.print("eclairement :");
+    Serial.println(laTrameMesure.eclairement);
+    Serial.print("point de rosée :");
+    Serial.println(laTrameMesure.pointDeRosee);
+    Serial.print("humidité :");
+    Serial.println(laTrameMesure.humidite);
+    Serial.print("type :");
+    Serial.println(laTrameMesure.typeTrame);
 
 }
 
@@ -59,8 +59,8 @@ void ModemSigfox::ForgerTrameBatterie(mesureBatterie lesMesuresBatterie) {
     laTrameBatterie.nu = 0;
     laTrameBatterie.tauxDeCharge = (short) (lesMesuresBatterie.tauxDeChargeBatterie * 2);
     laTrameBatterie.typeTrame = 2;
-         bool StatusSig=envoyer((void*)&laTrameBatterie,sizeof(laTrameBatterie));
-        Serial.println("Envoi effectuer");
+       //  bool StatusSig=envoyer((void*)&laTrameBatterie,sizeof(laTrameBatterie));
+        //Serial.println("Envoi effectuer");
     Serial.print("tension :");
     Serial.println(laTrameBatterie.tension);
     Serial.print("courant :");

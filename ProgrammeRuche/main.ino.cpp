@@ -19,8 +19,8 @@
 #include "ControleurRuche.h"
 #include "constante.h"
 
-#define uS_TO_S_FACTOR 1000000  /* Conversion factor for micro seconds to seconds */
-#define TIME_TO_SLEEP  10 
+//#define uS_TO_S_FACTOR 1000000  /* Conversion factor for micro seconds to seconds */
+//#define TIME_TO_SLEEP  10 
 
 
 
@@ -47,10 +47,10 @@ void setup() {
     Serial.begin(SERIAL_BAUD);
     Wire.begin();
     EEPROM.begin(EEPROM_SIZE);
-
+   
     
     leControleur = new ControleurRuche();
-
+Serial.println("Setup");
     pinMode(13, INPUT_PULLUP);
 
     gpio_wakeup_enable((GPIO_NUM_13), GPIO_INTR_HIGH_LEVEL);
@@ -60,6 +60,7 @@ void setup() {
 }
 
 void loop() {
+    Serial.println("loop");
     //    leControleur->RecupererDonnees();
       float choix = 0;
      // leControleur->leMenu->AfficherMenu();
