@@ -1,19 +1,28 @@
 /**
  * @file Batterie.cpp
  * @brief Déclaration de la classe Batterie
- * @version 1.0
+ * @version 2.0
  * @author Quentin BRAULT
- * @date 21/05/2021
+ * @date 28/05/2021
  * 
  */
 
 #include <Adafruit_INA219.h>
-#include "constante.h"
+#include <EEPROM.h>
+
 #ifndef BATTERIE_H
 #define BATTERIE_H
 
-/** Structure regroupant les caractéristiques de la batterie*/
+#define EEPROM_SIZE 512
 
+/** Structure regroupant les caractéristiques de la batterie*/
+struct mesureBatterie {
+    float tensionBatterie;
+    float puissanceBatterie;
+    int tauxDeChargeBatterie;
+    float chargeBatterie;
+    float intensiteBatterie;
+};
 
 class Batterie : public Adafruit_INA219 {
 public:
@@ -21,7 +30,7 @@ public:
     Batterie(const Batterie& orig);
     virtual ~Batterie();
 
-    void ConfigurerCapacite(int nouvCapacite);
+    void ConfigurerCapacite(float nouvCapacite);
     int DonnerCapacite();
     mesureBatterie CalculerCaracteristiques();
 private:
@@ -33,9 +42,13 @@ private:
     float capacite;
 
     float intensite;
+
+    int loop;
     mesureBatterie lesMesuresB;
 
     Adafruit_INA219 *ina219;
+
 };
 
 #endif /* BATTERIE_H */
+
