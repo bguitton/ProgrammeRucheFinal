@@ -136,4 +136,5 @@ build.lolin32-1.0.4/Batterie.cpp.o: Batterie.cpp \
  /opt/Esp8266-Arduino-Makefile/libraries/INA219/Adafruit_SPIDevice.h \
  /opt/Esp8266-Arduino-Makefile/esp32-1.0.4/libraries/SPI/src/SPI.h \
  /opt/Esp8266-Arduino-Makefile/esp32-1.0.4/cores/esp32/esp32-hal-spi.h \
+ /opt/Esp8266-Arduino-Makefile/esp32-1.0.4/libraries/EEPROM/src/EEPROM.h \
  constante.h

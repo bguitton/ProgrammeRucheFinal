@@ -9,6 +9,7 @@
 
 #include <Adafruit_INA219.h>
 #include <EEPROM.h>
+#include "constante.h"
 
 #ifndef BATTERIE_H
 #define BATTERIE_H
@@ -16,13 +17,7 @@
 #define EEPROM_SIZE 512
 
 /** Structure regroupant les caractéristiques de la batterie*/
-struct mesureBatterie {
-    float tensionBatterie;
-    float puissanceBatterie;
-    int tauxDeChargeBatterie;
-    float chargeBatterie;
-    float intensiteBatterie;
-};
+
 
 class Batterie : public Adafruit_INA219 {
 public:

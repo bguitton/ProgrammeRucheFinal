@@ -1,14 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
-/* 
- * File:   Menu.cpp
- * Author: bguitton
- * 
- * Created on 6 mai 2021, 16:58
+/**
+ @File:   Menu.cpp
+ @Author bguitton 
+ @date 6/05/2021
+ @details
  */
 
 #include "Menu.h"
@@ -37,7 +32,6 @@ void Menu::AfficherMenuBatterie() {
     Serial.println("\n Menu Batterie, que souhaitez-vous faire ? \n");
     Serial.println("\n 1- Configurer la capacité de la Batterie \n");
     Serial.println("\n 2- Retourner en arrière\n");
-
 }
 
 void Menu::AfficherMenuBalance() {
@@ -47,8 +41,6 @@ void Menu::AfficherMenuBalance() {
     Serial.println("\n 2- Etalonner la balance ");
     Serial.println("\n 3- Peser ");
     Serial.println("\n 4- Retourner en arrière\n");
-
-
 }
 
 void Menu::AfficherMenuSysteme() {

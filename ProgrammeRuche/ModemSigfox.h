@@ -1,15 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/** 
+ @file ModemSigfox.h
+ @autho GUITTON Baptiste
+ @brief Déclaration de la classe ModemSigfox
+ @date 21/05/2021
+ @details  Classe modélisant l'utilisation de Sigfox
  */
 
-/* 
- * File:   ModemSigfox.h
- * Author: bguitton
- *
- * Created on 21 mai 2021, 10:31
- */
 
 #ifndef MODEMSIGFOX_H
 #define MODEMSIGFOX_H
@@ -59,8 +55,6 @@ public:
     void ForgerTrameMesure(mesure lesMesures, float masse);
     void ForgerTrameBatterie(mesureBatterie lesMesuresBatterie);
     virtual ~ModemSigfox();
-    // trameBatterie ForgerTrameBatterie();
-
 private:
     trameMesure laTrameMesure;
     trameBatterie laTrameBatterie;

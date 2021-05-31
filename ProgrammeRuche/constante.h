@@ -1,16 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/** 
+ @file constante.h
+ @autho GUITTON Baptiste
+ @brief Déclaration du document contenant toute les définition du projet
+ @date 06/05/2021
  */
-
-/* 
- * File:   constante.h
- * Author: bguitton
- *
- * Created on 6 mai 2021, 15:51
- */
-
 #ifndef CONSTANTE_H
 #define CONSTANTE_H
 #define EEPROM_SIZE 512

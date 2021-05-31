@@ -1,11 +1,12 @@
 /**
- *
- *
- * @File:   Balance.cpp
- * @Author: bguitton
+ * @file balance.cpp
+ * @brief Implémentation de la classe Balance
+ * @author GUITTON Baptiste
+ * @date 22/03/2021
+ * @details Classe récupérant les informations et le paramatrage relatif à la balance
  * 
- * @date Created on 22 mars 2021, 09:20
  */
+
 
 #include "Balance.h"
 #define TAILLEMAX 11
@@ -19,12 +20,7 @@ Balance::Balance(int dout, int sck, int gain) {
     tarage = false;
 
     leHX711 = new HX711();
-
-
     leHX711->begin(dout, sck, gain);
-
-
-
 }
 
 Balance::Balance(const Balance& orig) {
@@ -33,7 +29,10 @@ Balance::Balance(const Balance& orig) {
 Balance::~Balance() {
     delete leHX711;
 }
-
+/**
+ * @detail 
+ * @return poids en kilogramme
+ */
 float Balance::Peser() {
 
 

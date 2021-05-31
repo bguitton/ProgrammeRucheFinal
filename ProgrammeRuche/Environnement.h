@@ -1,16 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/** 
+ @file Environnement.h
+ @autho GUITTON Baptiste
+ @brief Déclaration de la classe Environnement
+ @date 26/03/2021
+ @details  Classe modélisant la gestion des capteurs
  */
-
-/* 
- * File:   Environnement.h
- * Author: bguitton
- *
- * Created on 26 mars 2021, 11:14
- */
-
 #ifndef ENVIRONNEMENT_H
 #define ENVIRONNEMENT_H
 
@@ -19,15 +13,6 @@
 #include<BME280I2C.h>
 #include <BH1750.h>
 #include "constante.h"
-
-
-//struct mesure {
-//    float temperature;
-//    float humidite;
-//    float pression;
-//    float eclairement;
-//};
-
 
 class Environnement {
 public:

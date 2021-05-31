@@ -1,16 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/** 
+ @file Menu.h
+ @autho GUITTON Baptiste
+ @brief Déclaration de la classe Menu
+ @date 06/05/2021
+ @details  Classe modélisant la gestion de l'affichage des menu
  */
-
-/* 
- * File:   Menu.h
- * Author: bguitton
- *
- * Created on 6 mai 2021, 16:58
- */
-
 #ifndef MENU_H
 #define MENU_H
 

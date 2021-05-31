@@ -52,18 +52,11 @@ Environnement::~Environnement() {
 
 mesure Environnement::ObtenirMesures() {
     float temp(NAN), hum(NAN), pres(NAN), ecl(NAN);
-
-
-
     leBme280->read(pres, temp, hum, BME280::TempUnit_Celsius, BME280::PresUnit_hPa);
-
     lesMesures.temperature = temp;
     lesMesures.humidite = hum;
     lesMesures.pression = pres;
     lesMesures.eclairement = leBh1750->readLightLevel();
-
-
-
     return lesMesures;
 }
 

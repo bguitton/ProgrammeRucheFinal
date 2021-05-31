@@ -1,16 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/* 
- * File:   ControleurRuche.cpp
- * Author: bguitton
+/**
+ * @file ControleurRuche.cpp
+ * @brief Implémentation de la classe ControleurRuche
+ * @author GUITTON Baptiste
+ * @date 04/05/2021
+ * @details Classe récupérant les informations et le paramatrage relatif à la balance
  * 
- * Created on 4 mai 2021, 09:40
  */
-
 #include "ControleurRuche.h"
 
 ControleurRuche::ControleurRuche() {
@@ -25,7 +20,7 @@ ControleurRuche::ControleurRuche() {
     laBatterie = new Batterie();
     leMenu = new Menu();
     leModemSigfox = new ModemSigfox();
-    leModemSigfox->begin();
+    //leModemSigfox->begin();
     choixTrame = true;
 
     Serial.println("Constructeur controleur");
@@ -46,13 +41,13 @@ void ControleurRuche::RecupererDonnees() {
     masse = laBalance->Peser();
     Serial.print("Temp: ");
     Serial.print(lesMesuresC.temperature);
-    Serial.print("°C\t");
+    Serial.println("°C\t");
     Serial.print("Humidity: ");
     Serial.print(lesMesuresC.humidite);
-    Serial.print("% RH\t");
+    Serial.println("% RH\t");
     Serial.print("Pressure: ");
     Serial.print(lesMesuresC.pression);
-    Serial.print("hPa\t");
+    Serial.println("hPa\t");
     Serial.print("eclairement: ");
     Serial.print(lesMesuresC.eclairement);
     Serial.println("lux\t");
@@ -98,11 +93,6 @@ void ControleurRuche::Ordonnancer() {
         choixTrame = true;
     }
 }
-
-void ControleurRuche::ConfiguerNom() {
-
-}
-
 void ControleurRuche::CommandeSaisie() {
 
 }
@@ -117,11 +107,6 @@ void ControleurRuche::Retour() {
     GestionMenu(choix);
 
 }
-
-void ControleurRuche::ConfiguerBatterie() {
-
-}
-
 void ControleurRuche::GestionMenu(int _choix) {
 
 
@@ -205,7 +190,7 @@ void ControleurRuche::GestionMenuBalance() {
     int choix;
 
     laBalance->ConfiguerOffset(EEPROM.readDouble(0)); // lire le coef offset à l'adresse 0 et configuration de offset
-    laBalance->ConfiguerScale(EEPROM.readDouble(10));
+    laBalance->ConfiguerSc2ale(EEPROM.readDouble(10));
     do {
         while (!Serial.available());
         choix = Serial.read();
@@ -224,7 +209,7 @@ void ControleurRuche::GestionMenuBalance() {
                 break;
             case '2': // l'utilisateur à choisi l'option Tarer
                 if (laBalance->TarageEffectuer()) {
-                    Serial.println("Poser le poids étalon puis donnez sa valeur en gramme (ex:400g= 400) et appuyez sur entrer ");
+                    Serial.println("Poser la masse étalon puis donnez sa valeur en gramme (ex:400g= 400) et appuyez sur entrer ");
                     while (!Serial.available());
 
                     while (Serial.available() == 0) {

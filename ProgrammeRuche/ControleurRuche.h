@@ -1,16 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- /
-
-/ 
- * File:   ControleurRuche.h
- * Author: bguitton
- *
- * Created on 4 mai 2021, 09:40
+/** 
+ @file ControleurRuche.h
+ @autho GUITTON Baptiste
+ @brief Déclaration de la classe ControleurRuche
+ @date 04/05/2021
+ @details Classe principale du projet Ruche
  */
-
 #ifndef CONTROLEURRUCHE_H
 #define CONTROLEURRUCHE_H
 #include "Balance.h"

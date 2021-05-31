@@ -1,16 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/** 
+ @file Balance.h
+ @autho GUITTON Baptiste
+ @brief Déclaration de la classe Balance
+ @date 22/03/2021
+ @details Classe modélisant la gestion de la balance
  */
-
-/* 
- * File:   Balance.h
- * Author: bguitton
- *
- * Created on 22 mars 2021, 09:20
- */
-
 #ifndef BALANCE_H
 #define BALANCE_H
 #include "HX711.h"
