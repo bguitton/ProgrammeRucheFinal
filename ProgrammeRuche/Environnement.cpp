@@ -1,18 +1,17 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/* 
- * File:   Environnement.cpp
- * Author: bguitton
+/**
+ * @file Environnement.cpp
+ * @brief Implémentation de la classe Environnement
+ * @author GUITTON Baptiste
+ * @date 26/03/2021
+ * @details Classe récupérant les informations relatif aux capteurs d'éclairement,pression,humidité,température
  * 
- * Created on 26 mars 2021, 11:14
  */
 
 #include "Environnement.h"
-
+/**
+ * @brief Environnement::Environnement
+ * @details Initialisation des capteurs BME280 et BH1750
+ */
 Environnement::Environnement(bool _debug,BME280I2C::I2CAddr adresse)
 : debug(_debug) {
     
@@ -43,13 +42,19 @@ Environnement::Environnement(bool _debug,BME280I2C::I2CAddr adresse)
    
 }
 
-
-
+/**
+ * @brief Environnement::~Environnement
+ * @details destructeur de la classe Environnement
+ */
 Environnement::~Environnement() {
     delete leBh1750;
     delete leBme280;
 }
-
+/**
+ * @brief Environnement::ObtenirMesures
+ * @details Cette fonction permet d'intéroger les capteurs et de remplire une stucture
+ * @return retourne la stucture avec les nouvelles données
+ */
 mesure Environnement::ObtenirMesures() {
     float temp(NAN), hum(NAN), pres(NAN), ecl(NAN);
     leBme280->read(pres, temp, hum, BME280::TempUnit_Celsius, BME280::PresUnit_hPa);

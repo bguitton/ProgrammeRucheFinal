@@ -3,11 +3,14 @@
  * @brief Implémentation de la classe ControleurRuche
  * @author GUITTON Baptiste
  * @date 04/05/2021
- * @details Classe récupérant les informations et le paramatrage relatif à la balance
+ * @details Classe principal du projet , permet la création des différent objets
  * 
  */
 #include "ControleurRuche.h"
-
+/**
+ * @brief ControleurRuche::ControleurRuche
+ * @details création de tout les objets et lecture de l'EEPROM
+ */
 ControleurRuche::ControleurRuche() {
 
 
@@ -34,7 +37,10 @@ ControleurRuche::ControleurRuche(const ControleurRuche& orig) {
 
 ControleurRuche::~ControleurRuche() {
 }
-
+/**
+ * @brief ControleurRuche::RecupererDonnees
+ * @detail cette fonction permet la recupération de toute les données relative à la classe Environnement et Balance
+ */
 void ControleurRuche::RecupererDonnees() {
 
     lesMesuresC = unEnvironnement->ObtenirMesures();
@@ -57,7 +63,10 @@ void ControleurRuche::RecupererDonnees() {
 
 
 }
-
+/**
+ * @brief ControleurRuche::RecupererDonneesBatterie
+ * @detail cette fonction permet la recupération de toute les données relative à la classe Batterie
+ */
 void ControleurRuche::RecupererDonneesBatterie() {
     lesMesuresBatterie = laBatterie->CalculerCaracteristiques();
     Serial.print("Tension:       ");
@@ -80,7 +89,10 @@ void ControleurRuche::RecupererDonneesBatterie() {
     delay(1000);
 
 }
-
+/**
+ * @brief ControleurRuche::Ordonnancer
+ * @detail cette fonction permet d'alterner en la récupération des mesures et la récupération des données de la batterie
+ */
 void ControleurRuche::Ordonnancer() {
     if (choixTrame == true) {
         RecupererDonnees();
@@ -93,10 +105,10 @@ void ControleurRuche::Ordonnancer() {
         choixTrame = true;
     }
 }
-void ControleurRuche::CommandeSaisie() {
-
-}
-
+/**
+ * @brief ControleurRuche::Retour
+ * @detail cette fonction permet de retourner au menu précédent ou de quitter le Menu
+ */
 void ControleurRuche::Retour() {
     int choix;
     leMenu->AfficherMenu();
@@ -107,6 +119,10 @@ void ControleurRuche::Retour() {
     GestionMenu(choix);
 
 }
+/**
+ * @brief ControleurRuche::GestionMenu
+ * @detail cette fonction permet d'interpréter le choix de l'utilisateur dans le menu principal
+ */
 void ControleurRuche::GestionMenu(int _choix) {
 
 
@@ -127,7 +143,10 @@ void ControleurRuche::GestionMenu(int _choix) {
     }
 
 }
-
+/**
+ * @brief ControleurRuche::GestionMenuSysteme
+ * @detail cette fonction permet d'interpréter le choix de l'utilisateur dans le menu Systeme
+ */
 void ControleurRuche::GestionMenuSysteme() {
     String nom;
     int choix;
@@ -149,7 +168,10 @@ void ControleurRuche::GestionMenuSysteme() {
             Serial.println(nom);
     }
 }
-
+/**
+ * @brief ControleurRuche::GestionMenuBatterie
+ * @detail cette fonction permet d'interpréter le choix de l'utilisateur dans le menu Batterie
+ */
 void ControleurRuche::GestionMenuBatterie() {
     int choix;
     int capacite;
@@ -184,7 +206,10 @@ void ControleurRuche::GestionMenuBatterie() {
     } while (choix != '2');
     leMenu->AfficherMenu();
 }
-
+/**
+ * @brief ControleurRuche::GestionMenuBalance
+ * @detail cette fonction permet d'interpréter le choix de l'utilisateur dans le menu Balance
+ */
 void ControleurRuche::GestionMenuBalance() {
     float poidEtalon;
     int choix;

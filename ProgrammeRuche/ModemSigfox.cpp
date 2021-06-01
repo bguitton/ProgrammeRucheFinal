@@ -1,9 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * @file ModemSigfox.cpp
+ * @brief Implémentation de la classe ModemSigfox
+ * @author GUITTON Baptiste
+ * @date 21/05/2021
+ * @details Classe qui permet l'utilisation de Sigfox
+ * 
  */
-
 /* 
  * File:   ModemSigfox.cpp
  * Author: bguitton
@@ -12,11 +14,17 @@
  */
 
 #include "ModemSigfox.h"
-
+/**
+ * @brief ModemSigfox::ModemSigfox
+ * @details constucteur de la classe ModemSigfox avec les paramettres du constucteur de la classe Sigfox 
+ */
 ModemSigfox::ModemSigfox() : Sigfox(27, 26, true) {
 
 }
-
+/**
+ * @brief ModemSigfox::ForgerTrameMesure
+ * @details cette fonction forge la trame relative aux mesures et envoie les données 
+ */
 void ModemSigfox::ForgerTrameMesure(mesure lesMesures, float masse) {
 
 
@@ -46,10 +54,16 @@ void ModemSigfox::ForgerTrameMesure(mesure lesMesures, float masse) {
     Serial.println(laTrameMesure.typeTrame);
 
 }
-
+/**
+ * @brief ModemSigfox::~ModemSigfox
+ * @details destucteur de la classe
+ */
 ModemSigfox::~ModemSigfox() {
 }
-
+/**
+ * @brief ModemSigfox::ForgerTrameBatterie
+ * @details cette fonction forge la trame relative à la batterie et envoie les données 
+ */
 void ModemSigfox::ForgerTrameBatterie(mesureBatterie lesMesuresBatterie) {
     //float tension = (lesMesuresBatterie.puissanceBatterie / lesMesuresBatterie.intensiteBatterie) * 100.0;
     laTrameBatterie.tension = (short) (lesMesuresBatterie.tensionBatterie*100);

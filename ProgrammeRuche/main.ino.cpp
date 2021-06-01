@@ -55,16 +55,7 @@ Serial.println("Setup");
 }
 
 void loop() {
-    Serial.println("loop");
-    //    leControleur->RecupererDonnees();
       float choix = 0;
-     // leControleur->leMenu->AfficherMenu();
-    //
-    //    while (Serial.available() == 0) {
-    //    }
-    //    choix = Serial.read();
-    //    Serial.println(choix);
-    //    leControleur->GestionMenu(choix);
 
     esp_sleep_enable_gpio_wakeup();
     esp_sleep_enable_timer_wakeup(TIME_TO_SLEEP * uS_TO_S_FACTOR);
