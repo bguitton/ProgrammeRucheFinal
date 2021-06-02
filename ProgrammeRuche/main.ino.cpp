@@ -15,7 +15,7 @@
 #include "constante.h"
 
 //#define uS_TO_S_FACTOR 1000000  /* Conversion factor for micro seconds to seconds */
-//#define TIME_TO_SLEEP  10 
+//#define TIME_TO_SLEEP  5 
 
 
 
@@ -29,13 +29,6 @@ esp_sleep_wakeup_cause_t wakeup_reason;
 ControleurRuche *leControleur;
 
 
-esp_sleep_wakeup_cause_t print_wakeup_reason() {
-    esp_sleep_wakeup_cause_t wakeup_reason;
-
-    wakeup_reason = esp_sleep_get_wakeup_cause();
-
-    return wakeup_reason;
-}
 
 void setup() {
 
@@ -60,7 +53,7 @@ void loop() {
     esp_sleep_enable_gpio_wakeup();
     esp_sleep_enable_timer_wakeup(TIME_TO_SLEEP * uS_TO_S_FACTOR);
 
-    wakeup_reason = print_wakeup_reason();
+    wakeup_reason = esp_sleep_get_wakeup_cause();
     
     if (wakeup_reason == ESP_SLEEP_WAKEUP_GPIO) {
           leControleur->leMenu->AfficherMenu();

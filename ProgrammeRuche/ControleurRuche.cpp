@@ -94,16 +94,16 @@ void ControleurRuche::RecupererDonneesBatterie() {
  * @detail cette fonction permet d'alterner en la récupération des mesures et la récupération des données de la batterie
  */
 void ControleurRuche::Ordonnancer() {
-    if (choixTrame == true) {
+    /*if (choixTrame == true) {
         RecupererDonnees();
         leModemSigfox->ForgerTrameMesure(lesMesuresC, masse);
         choixTrame = false;
 
-    } else {
+    } else {*/
         RecupererDonneesBatterie();
         leModemSigfox->ForgerTrameBatterie(lesMesuresBatterie);
         choixTrame = true;
-    }
+   // }
 }
 /**
  * @brief ControleurRuche::Retour
@@ -150,6 +150,7 @@ void ControleurRuche::GestionMenu(int _choix) {
 void ControleurRuche::GestionMenuSysteme() {
     String nom;
     int choix;
+    do{
     while (!Serial.available());
 
 
@@ -161,12 +162,24 @@ void ControleurRuche::GestionMenuSysteme() {
             while (!Serial.available());
             nom = Serial.readString();
             Serial.println("\n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n");
+            leMenu->AfficherMenuSysteme();
             break;
         case '2':
             Serial.println();
-            Serial.print("Configuration : ");
+            Serial.println("Configuration : \n");
+            Serial.print("Nom du système : ");
             Serial.println(nom);
+            Serial.print("Capacité : ");
+            Serial.println(laBatterie->DonnerCapacite());
+            Serial.print("Offset de la Balance : ");
+            Serial.println(laBalance->ObtenirOffset());
+            Serial.print("Scale de la Balance : ");
+            Serial.println(laBalance->ObtenirScale());
+            delay(2000);
+            leMenu->AfficherMenuSysteme();
     }
+    }while(choix != '3');
+    leMenu->AfficherMenu();
 }
 /**
  * @brief ControleurRuche::GestionMenuBatterie
@@ -174,7 +187,7 @@ void ControleurRuche::GestionMenuSysteme() {
  */
 void ControleurRuche::GestionMenuBatterie() {
     int choix;
-    int capacite;
+    float capacite;
     do {
         do {
             while (!Serial.available());
@@ -189,11 +202,10 @@ void ControleurRuche::GestionMenuBatterie() {
                 Serial.print(" Entrez la nouvelle capacité : ");
                 do {
                     while (!Serial.available());
-                    capacite = Serial.read();
-                    capacite = capacite - '0';
+                    capacite = Serial.parseFloat();
                     laBatterie->ConfigurerCapacite(capacite);
                     Serial.print(capacite);
-                } while (capacite < 1 || capacite > 9);
+                } while (capacite < 1 );
                 leMenu->AfficherMenuBatterie();
                 break;
 
@@ -215,7 +227,7 @@ void ControleurRuche::GestionMenuBalance() {
     int choix;
 
     laBalance->ConfiguerOffset(EEPROM.readDouble(0)); // lire le coef offset à l'adresse 0 et configuration de offset
-    laBalance->ConfiguerSc2ale(EEPROM.readDouble(10));
+    laBalance->ConfiguerScale(EEPROM.readDouble(10));
     do {
         while (!Serial.available());
         choix = Serial.read();
