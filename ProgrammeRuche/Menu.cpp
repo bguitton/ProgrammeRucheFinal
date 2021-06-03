@@ -62,5 +62,6 @@ void Menu::AfficherMenuSysteme() {
     Serial.println("\n \n \n Menu Système, que souhaitez-vous faire ?");
     Serial.println("\n 1- Configurer le nom ");
     Serial.println("\n 2- Afficher la configuration ");
-    Serial.println("\n 3- Retourner en arrière\n");
+    Serial.println("\n 3- Remettre à zéro l'ESP32 ");
+    Serial.println("\n 4- Retour en arrière \n");
 }

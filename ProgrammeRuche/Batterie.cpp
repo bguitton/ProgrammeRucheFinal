@@ -94,8 +94,8 @@ mesureBatterie Batterie::CalculerCaracteristiques() {
 
 
     /**Calcul Charge de la batterie*/
-    lesMesuresB.chargeBatterie = ancienneCharge + ((ancienneIntensite + lesMesuresB.intensiteBatterie / 1000) / 2) * 0.5;
-
+    lesMesuresB.chargeBatterie = ancienneCharge + ((ancienneIntensite + lesMesuresB.intensiteBatterie / 1000) / 2) * 0.25;
+  
     /**Si la charge de la batterie excéde la capacité ou est en dessous de 0, corrige le problème*/
     if (lesMesuresB.chargeBatterie > capacite) {
         lesMesuresB.chargeBatterie = capacite;

@@ -26,7 +26,6 @@ ControleurRuche::ControleurRuche() {
     //leModemSigfox->begin();
     choixTrame = true;
 
-    Serial.println("Constructeur controleur");
     laBalance->ConfiguerOffset(EEPROM.readDouble(0)); // lire le coef offset à l'adresse 0 et configuration de offset
     laBalance->ConfiguerScale(EEPROM.readDouble(10)); // lire le coef scale à l'adresse 10 et configuration de scale
     
@@ -94,16 +93,16 @@ void ControleurRuche::RecupererDonneesBatterie() {
  * @detail cette fonction permet d'alterner en la récupération des mesures et la récupération des données de la batterie
  */
 void ControleurRuche::Ordonnancer() {
-    /*if (choixTrame == true) {
+    if (choixTrame == true) {
         RecupererDonnees();
         leModemSigfox->ForgerTrameMesure(lesMesuresC, masse);
         choixTrame = false;
 
-    } else {*/
+    } else {
         RecupererDonneesBatterie();
         leModemSigfox->ForgerTrameBatterie(lesMesuresBatterie);
         choixTrame = true;
-   // }
+   }
 }
 /**
  * @brief ControleurRuche::Retour
@@ -148,8 +147,9 @@ void ControleurRuche::GestionMenu(int _choix) {
  * @detail cette fonction permet d'interpréter le choix de l'utilisateur dans le menu Systeme
  */
 void ControleurRuche::GestionMenuSysteme() {
-    String nom;
+    String nom = "Ruche de Beaufay";
     int choix;
+    int choix2;
     do{
     while (!Serial.available());
 
@@ -169,7 +169,7 @@ void ControleurRuche::GestionMenuSysteme() {
             Serial.println("Configuration : \n");
             Serial.print("Nom du système : ");
             Serial.println(nom);
-            Serial.print("Capacité : ");
+            Serial.print("Capacité de la Batterie : ");
             Serial.println(laBatterie->DonnerCapacite());
             Serial.print("Offset de la Balance : ");
             Serial.println(laBalance->ObtenirOffset());
@@ -177,8 +177,25 @@ void ControleurRuche::GestionMenuSysteme() {
             Serial.println(laBalance->ObtenirScale());
             delay(2000);
             leMenu->AfficherMenuSysteme();
+            break;
+        case '3':
+            Serial.println();
+            Serial.println("Voulez vous supprimer toutes les données de l'ESP32 ? (1 = Oui / 2 = Non) : ");
+            do{
+            while (!Serial.available());
+            choix2 = Serial.read();
+            }while (choix2 < '1' || choix2 > '2');
+            if(choix2 == '1'){
+                for (int i = 0; i < 512; i++) {
+                EEPROM.write(i, 0);
+                }
+                EEPROM.end();
+                Serial.println("Appuyez sur le bouton EN de l'esp32 pour relancer le programme.");
+                while(1==1){}
+  }
+            leMenu->AfficherMenuSysteme();
     }
-    }while(choix != '3');
+    }while(choix != '4');
     leMenu->AfficherMenu();
 }
 /**
@@ -192,7 +209,7 @@ void ControleurRuche::GestionMenuBatterie() {
         do {
             while (!Serial.available());
             choix = Serial.read();
-        } while (choix < '1' || choix > '3');
+        } while (choix < '1' || choix > '2');
         switch (choix) {
             case '1':
                 Serial.println("\n \n");
@@ -207,13 +224,6 @@ void ControleurRuche::GestionMenuBatterie() {
                     Serial.print(capacite);
                 } while (capacite < 1 );
                 leMenu->AfficherMenuBatterie();
-                break;
-
-            case '3':
-                Serial.println("\n \n");
-                Serial.print(" La capacité est de : ");
-                Serial.println(laBatterie->DonnerCapacite());
-
         }
     } while (choix != '2');
     leMenu->AfficherMenu();
@@ -233,15 +243,15 @@ void ControleurRuche::GestionMenuBalance() {
         choix = Serial.read();
         switch (choix) {
             case '1': // l'utilisateur à choisi l'option Tarer
-                Serial.println("vider le plateau et appuyer sur une touche pour tarer ");
+                Serial.println("Vider le plateau et appuyer sur une touche pour tarer ");
                 while (!Serial.available());
                 while (Serial.available()) Serial.read();
                 laBalance->TarerLaBalance();
                 // Serial.println(laBalance.ObtenirOffset()); affichage de coef offset
-                Serial.println("tarage effectuer: \t\t");
+                Serial.println("Tarage effectué: \t\t");
                 EEPROM.writeDouble(0, laBalance->ObtenirOffset()); // sauvegarder le coef offset à l'adresse 0
                 EEPROM.commit();
-                Serial.print("masse = ");
+                Serial.print("Masse = ");
                 Serial.println(laBalance->Peser());
                 break;
             case '2': // l'utilisateur à choisi l'option Tarer
@@ -262,12 +272,12 @@ void ControleurRuche::GestionMenuBalance() {
                     EEPROM.writeDouble(10, laBalance->ObtenirScale()); // sauvegarder le coef scale à l'adresse 10
                     EEPROM.commit();
                 } else {
-                    Serial.println("Vous devez tarer la balance avant de faire un etalonnage ");
+                    Serial.println("Vous devez tarer la balance avant de faire un étalonnage ");
                 }
                 break;
             case '3':
-                Serial.print("masse = ");
-                Serial.println(laBalance->Peser()); // appel de la fonction peser qui renvoi la masse mesurée
+                Serial.print("Masse = ");
+                Serial.println(laBalance->Peser()); // appel de la fonction peser qui renvoit la masse mesurée
 
 
         }
