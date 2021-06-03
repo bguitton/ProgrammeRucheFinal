@@ -61,7 +61,6 @@ void loop() {
           while (Serial.available() == 0) {
         }
         choix = Serial.read();
-        Serial.println(choix);
         leControleur->GestionMenu(choix);
           }while(choix!='4');
     }
