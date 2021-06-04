@@ -93,16 +93,16 @@ void ControleurRuche::RecupererDonneesBatterie() {
  * @detail cette fonction permet d'alterner en la récupération des mesures et la récupération des données de la batterie
  */
 void ControleurRuche::Ordonnancer() {
-    if (choixTrame == true) {
+    /**if (choixTrame == true) {
         RecupererDonnees();
         leModemSigfox->ForgerTrameMesure(lesMesuresC, masse);
         choixTrame = false;
 
-    } else {
+    } else {*/
         RecupererDonneesBatterie();
         leModemSigfox->ForgerTrameBatterie(lesMesuresBatterie);
         choixTrame = true;
-   }
+   //}
 }
 /**
  * @brief ControleurRuche::Retour
