@@ -40,3 +40,5 @@ private:
 
 #endif /* BALANCE_H */
 
+#include <EEPROM.h>
+#include "HX711.h"

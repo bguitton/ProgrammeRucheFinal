@@ -12,7 +12,7 @@
 #define SERIAL_BAUD 115200
 
 #define uS_TO_S_FACTOR 1000000  /* Conversion factor for micro seconds to seconds */
-#define TIME_TO_SLEEP  10        /* Time ESP32 will go to sleep (in seconds) */
+#define TIME_TO_SLEEP  120        /* Time ESP32 will go to sleep (in seconds) */
 
 typedef struct {
     float temperature;
@@ -23,12 +23,12 @@ typedef struct {
 } mesure;
 
 typedef struct {
-    short temperature;
-    unsigned char humidite;
     unsigned short masse;
-    unsigned short eclairement;
+    short temperature;
     unsigned short pression;
+    unsigned short eclairement;
     short pointDeRosee;
+    unsigned char humidite;
     char typeTrame = 1;
 } trameMesure;
 
@@ -39,6 +39,8 @@ typedef struct {
     float chargeBatterie;
     float intensiteBatterie;
 } mesureBatterie;
+
+
 typedef struct {
     short tension;
     short courant;

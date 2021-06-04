@@ -48,6 +48,7 @@ Serial.println("Setup");
 }
 
 void loop() {
+    Serial.println("loop");
       float choix = 0;
 
     esp_sleep_enable_gpio_wakeup();

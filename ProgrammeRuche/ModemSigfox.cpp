@@ -16,9 +16,11 @@
 #include "ModemSigfox.h"
 /**
  * @brief ModemSigfox::ModemSigfox
- * @details constucteur de la classe ModemSigfox avec les paramettres du constucteur de la classe Sigfox 
+ * @details constucteur de la classe ModemSigfox avec les paramettres du constucteur de la classe Sigfox
+ *          27 RX coté ESP32 -> Tx du modem blanc
+ *          26 TX coté ESP32 -> RX du modem jaune
  */
-ModemSigfox::ModemSigfox() : Sigfox(27, 26, true) {
+ModemSigfox::ModemSigfox() : Sigfox(33, 32, false) {
 
 }
 /**
@@ -30,14 +32,14 @@ void ModemSigfox::ForgerTrameMesure(mesure lesMesures, float masse) {
 
     laTrameMesure.temperature = (short) (lesMesures.temperature * 100);
     laTrameMesure.humidite = (char) lesMesures.humidite;
-    laTrameMesure.masse = (short) (masse * 100);
+    laTrameMesure.masse = (short) (masse * 1000);
     laTrameMesure.pression = (short) lesMesures.pression;
     laTrameMesure.eclairement = (short) lesMesures.eclairement;
     laTrameMesure.pointDeRosee = 2234;
     laTrameMesure.typeTrame = 1;
 
-    // bool StatusSig=envoyer((void*)&laTrameMesure,sizeof(laTrameMesure));
-    // Serial.println("Envoi effectuer");
+   bool StatusSig=envoyer((void*)&laTrameMesure,sizeof(laTrameMesure));
+     Serial.println("Envoi effectuer");
     Serial.print("poids :");
     Serial.println(laTrameMesure.masse);
     Serial.print("température :");
@@ -73,8 +75,8 @@ void ModemSigfox::ForgerTrameBatterie(mesureBatterie lesMesuresBatterie) {
     laTrameBatterie.nu = 0;
     laTrameBatterie.tauxDeCharge = (short) (lesMesuresBatterie.tauxDeChargeBatterie * 2);
     laTrameBatterie.typeTrame = 2;
-       //  bool StatusSig=envoyer((void*)&laTrameBatterie,sizeof(laTrameBatterie));
-        //Serial.println("Envoi effectuer");
+      bool StatusSig=envoyer((void*)&laTrameBatterie,sizeof(laTrameBatterie));
+        Serial.println("Envoi effectuer");
     Serial.print("tension :");
     Serial.println(laTrameBatterie.tension);
     Serial.print("courant :");

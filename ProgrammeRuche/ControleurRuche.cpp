@@ -23,7 +23,7 @@ ControleurRuche::ControleurRuche() {
     laBatterie = new Batterie();
     leMenu = new Menu();
     leModemSigfox = new ModemSigfox();
-    //leModemSigfox->begin();
+    leModemSigfox->begin();
     choixTrame = true;
 
     laBalance->ConfiguerOffset(EEPROM.readDouble(0)); // lire le coef offset à l'adresse 0 et configuration de offset
@@ -59,7 +59,7 @@ void ControleurRuche::RecupererDonnees() {
     Serial.print(masse);
     Serial.println("kg\t");
 
-
+    
 
 }
 /**
@@ -84,25 +84,23 @@ void ControleurRuche::RecupererDonneesBatterie() {
     Serial.print(lesMesuresBatterie.tauxDeChargeBatterie);
     Serial.println("%");
     Serial.println("");
-
-    delay(1000);
-
+    
 }
 /**
  * @brief ControleurRuche::Ordonnancer
  * @detail cette fonction permet d'alterner en la récupération des mesures et la récupération des données de la batterie
  */
 void ControleurRuche::Ordonnancer() {
-    /**if (choixTrame == true) {
+    if (choixTrame == true) {
         RecupererDonnees();
         leModemSigfox->ForgerTrameMesure(lesMesuresC, masse);
         choixTrame = false;
 
-    } else {*/
+    } else {
         RecupererDonneesBatterie();
         leModemSigfox->ForgerTrameBatterie(lesMesuresBatterie);
         choixTrame = true;
-   //}
+   }
 }
 /**
  * @brief ControleurRuche::Retour
